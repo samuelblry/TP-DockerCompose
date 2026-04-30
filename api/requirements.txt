@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+motor
+mysql-connector-python
