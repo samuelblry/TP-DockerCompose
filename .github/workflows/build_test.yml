@@ -30,4 +30,24 @@ jobs:
           file: ./Dockerfile
           only-severities: critical,high
           exit-code: false
+      - name: Build the stack
+        run: docker compose up -d
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+
+          MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
+          MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
+          MONGO_DB: ${{ secrets.MONGO_DB }}
+          MONGO_URL: ${{ secrets.MONGO_URL }}
+      - name: Docker ps
+        run: docker ps
+      - name: docker import {{ status.health }} == healthy // exit 1
+        run: curl -f http://localchost:5000/users
           
