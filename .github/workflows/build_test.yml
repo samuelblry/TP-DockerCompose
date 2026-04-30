@@ -16,4 +16,4 @@ jobs:
       - name: Build image for scanning
         run: docker build -t my-app:1.0.0 -f ./api/Dockerfile .
       - name: Build image mongo for scanning
-        run: docker build -t my-app-mongo:1.0.0 -f ./mongo/Dockerfile .
+        run: cd mongo && docker build -t my-app-mongo:1.0.0 -f ./Dockerfile .
